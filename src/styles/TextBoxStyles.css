@@ -1,0 +1,28 @@
+.inputWrapper {
+    border: 1px darkgrey solid;
+    border-radius: 2px;
+    background-color: rgb(235, 235, 235);
+    margin: 0.2rem;
+}
+
+.inputContainer {
+    display: flex;
+    position: relative;
+    justify-content: flex-start;
+    align-content: center;
+    gap: 0.5rem;
+    padding-block: .2rem;
+}
+
+.inputContainer :nth-child(1) > svg {
+    display: block;
+    margin: auto;
+    padding-left: .2rem;
+}
+
+input {
+    border: none;
+    flex: 1 1 100%;
+    margin-right: auto;
+    background: transparent;
+}
