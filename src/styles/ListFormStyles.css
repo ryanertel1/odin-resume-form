@@ -1,0 +1,14 @@
+.list-container {
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    background-color: rgb(240,240,240);
+    padding: 1.2rem;
+}
+
+.list-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
