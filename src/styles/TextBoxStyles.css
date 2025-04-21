@@ -1,8 +1,11 @@
-.inputWrapper {
-    border: 1px darkgrey solid;
-    border-radius: 2px;
-    background-color: rgb(235, 235, 235);
-    margin: 0.2rem;
+.inputWrapper{
+    display: flex;
+    flex-direction: column;
+    padding-block: .5rem;
+}
+
+.inputWrapper > label {
+    align-self: baseline;
 }
 
 .inputContainer {
@@ -12,6 +15,10 @@
     align-content: center;
     gap: 0.5rem;
     padding-block: .2rem;
+    border: 1px darkgrey solid;
+    border-radius: 2px;
+    background-color: rgb(235, 235, 235);
+    margin: 0.2rem;
 }
 
 .inputContainer :nth-child(1) > svg {

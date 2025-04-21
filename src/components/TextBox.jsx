@@ -1,10 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useId } from "react";
 import '../styles/TextBoxStyles.css';
 
 const TextBox = ({ ...props }) => {
+    const id = useId();
     return (
         <>
             <div className='inputWrapper'>
+                <label
+                    htmlFor={id}
+                >
+                    {props.label}
+                </label>
                 <div className='inputContainer'>
                     {props.icon &&
                         <div>
@@ -13,6 +19,7 @@ const TextBox = ({ ...props }) => {
                     }
 
                     <input
+                        id = {id}
                         type = {props.type}
                         placeholder = {props.placeholder}
                         value = {props.value}

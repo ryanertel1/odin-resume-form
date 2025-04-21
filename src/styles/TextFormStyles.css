@@ -1,0 +1,13 @@
+.text-form-container {
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    background-color: rgb(240,240,240);
+    padding: 1.2rem;
+}
+
+.text-form-container > h2 {
+    align-self: baseline;
+    margin: 0;
+    margin-bottom: 1rem;
+}
