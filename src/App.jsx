@@ -5,9 +5,11 @@ import ListForm from './components/ListForm.jsx';
 function App() {
   return (
     <>
-      <TextForm title='Personal Info'/>
-      <ListForm title='Education'/>
-      <ListForm title='Work Experience'/>
+      <div className='info-container'>
+        <TextForm title='Personal Info'/>
+        <ListForm title='Education' formType='education'/>
+        <ListForm title='Work Experience' formType='experience'/>
+      </div>
     </>
   )
 }

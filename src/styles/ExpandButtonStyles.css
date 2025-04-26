@@ -11,7 +11,7 @@ button > svg {
     display: block;
     left: 0;
     top: 0;
-    min-width: 32px;
+    min-width: 2em;
     height: auto;
     flex-shrink: 0;
     transform: rotate(180deg);

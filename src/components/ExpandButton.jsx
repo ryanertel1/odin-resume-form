@@ -10,5 +10,4 @@ const ExpandButton = ({ ...props }) => {
     )
 }
 
-
 export default ExpandButton;
