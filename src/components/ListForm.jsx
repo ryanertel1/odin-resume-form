@@ -8,12 +8,16 @@ import ExperienceEditForm from './ExperienceEditForm.jsx';
 
 const initialList = [{
     placeholder: 'Fake University',
+    id: 0,
 }];
+
+let nextId = 1;
 
 const ListForm = ({ title, formType, ...props }) => {
 
     const [expandState, setExpandState] = useState(false);
     const [editState, setEditState] = useState(false);
+    const [editIndex, setEditIndex] = useState(0);
     const [list, setList] = useState(initialList);
 
     const style = {
@@ -27,6 +31,34 @@ const ListForm = ({ title, formType, ...props }) => {
 
     const handleAdd = () => {
         setEditState(true);
+        setEditIndex(list.length);
+        const newList = [...list];
+        newList.push({placeholder: '', id: nextId});
+        nextId++;
+        setList(newList);
+    }
+
+    const handleEdit = (e) => {
+        const index = findIndex(e.target.parentElement.id);
+        if(index > -1) {
+            setEditState(true);
+            setEditIndex(index)
+        }
+    }
+
+    const handleDelete = (e) => {
+        const newList = [...list];
+
+        const index = findIndex(e.target.parentElement.id);
+        if(index > -1) {
+            newList.splice(index, 1);
+            setList(newList);
+        }
+
+    }
+
+    const findIndex = (findId) => {
+        return list.findIndex(item => item.id == parseInt(findId));
     }
 
     function handleSave(event) {
@@ -51,7 +83,7 @@ const ListForm = ({ title, formType, ...props }) => {
             } }
 
         setEditState(false);
-        console.log(event.target, newEntry);
+        console.log(`target: ${event.target}\nnew entry: ${newEntry}`);
     }
 
     return (
@@ -67,9 +99,11 @@ const ListForm = ({ title, formType, ...props }) => {
                 { !editState ?
                     <>
                         <ul>
-                        {list.map((item) => (
-                            <li key={useId}>
+                        {list.map((item, index) => (
+                            <li id={item.id} key={(item.id + item.placeholder)}>
                                 <span>{item.placeholder}</span>
+                                <button className='edit-button' onClick={handleEdit}>Edit</button>
+                                <button className='delete-button' onClick={handleDelete}>Delete</button>
                             </li>
                         ))}
                         </ul>
@@ -77,11 +111,13 @@ const ListForm = ({ title, formType, ...props }) => {
                     </>:
                     <>
                         { formType === 'education' ?
-                            <EducationEditForm 
+                            <EducationEditForm
                                 handleSave = {handleSave}
+                                object = {list[editIndex]}
                             />:
                             <ExperienceEditForm
                                 handleSave = {handleSave}
+                                object = {list[editIndex]}
                             />
                         }
                     </>
