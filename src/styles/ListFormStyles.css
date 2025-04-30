@@ -2,7 +2,12 @@
     display: flex;
     flex-direction: column;
     border-radius: 10px;
+    padding-block: 1.2rem;
+}
+
+form {
     background-color: rgb(240,240,240);
+    border-radius: 0.5rem;
     padding: 1.2rem;
 }
 
@@ -11,12 +16,40 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    padding: 1.2rem;
+    border-radius: 0.5rem;
+    background-color: rgb(240,240,240);
+    margin-bottom: 0.2rem;
+}
+
+.list-container > ul {
+    padding: 0;
+    margin: 0;
+}
+
+.list-item {
+    display: grid;
+    grid-template-columns: auto 2em 2em;
+    background-color: rgb(240,240,240);
+    padding-block: 0.5rem;
+    padding-inline: 1.2rem;
+    border-radius: 0.5rem;
+    margin-bottom: 0.2rem;
+}
+
+.list-item > span {
+    justify-self: baseline;
+}
+
+.list-item > button > svg {
+    min-width: 1.5em;
+    height: auto;
 }
 
 .add-button {
     height: 3rem;
     width: 8rem;
-    background-color: blue;
+    background-color: rgb(240, 240, 240);
     align-self: center;
     border-radius: 5px;
 }

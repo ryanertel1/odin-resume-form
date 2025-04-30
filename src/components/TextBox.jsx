@@ -1,4 +1,4 @@
-import React, { useState, useId } from "react";
+import React, { useId } from "react";
 import '../styles/TextBoxStyles.css';
 
 const TextBox = ({ ...props }) => {

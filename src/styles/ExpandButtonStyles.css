@@ -6,7 +6,7 @@ button {
     padding: 0;
 }
 
-button > svg {
+.expand-button-icon {
     position: 'absolute';
     display: block;
     left: 0;

@@ -5,7 +5,7 @@ import { MdExpandCircleDown } from 'react-icons/md';
 const ExpandButton = ({ ...props }) => {
     return(
         <button onClick={props.onClick}>
-            <MdExpandCircleDown style={props.style}/>
+            <MdExpandCircleDown className = 'expand-button-icon' style={props.style}/>
         </button>
     )
 }
