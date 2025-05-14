@@ -1,4 +1,4 @@
-import React, { useState, useId } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import '../styles/ListFormStyles.css';
 import ExpandButton from './ExpandButton.jsx';
 import EducationEditForm from './EducationEditForm.jsx';
@@ -7,18 +7,16 @@ import { MdEdit, MdDeleteForever } from "react-icons/md";
 
 let nextId = 0;
 
-const ListForm = ({ title, formType, ...props }) => {
+const ListForm = ({ title, formType, handleData, data }) => {
 
     const [expandState, setExpandState] = useState(false);
     const [editState, setEditState] = useState(false);
     const [editIndex, setEditIndex] = useState(0);
-    const [list, setList] = useState();
 
     const rotateStyle = {
         transform: expandState ? 'rotate(360deg)':'',
         transition: 'transform 400ms ease',
     }
-
     const expandStyle = {
         display: expandState ? 'block':'none',
     }
@@ -27,39 +25,34 @@ const ListForm = ({ title, formType, ...props }) => {
         setExpandState(!expandState);
     }
 
-    const handleAdd = () => {
-        setEditState(true);
-        setEditIndex(list ? list.length:0);
-        const newList = list ? [...list]:[];
-        newList.push({placeholder: '', id: nextId});
-        nextId++;
-        setList(newList);
+    const findIndex = (findId) => {
+        return data.findIndex(item => item.id == parseInt(findId));
     }
 
-    const handleEdit = (e) => {
+    const handleAdd = () => {
+        let newData = data ? [...data]:[];
+        newData.push({placeholder: '', id: nextId});
+        nextId++;
+        setEditState(true);
+        setEditIndex(newData.length-1);
+        handleData(newData);
+    }
+    const handleDelete = (e) => {
+        const newData = [...data];
         const index = findIndex(e.currentTarget.parentElement.id);
+        if(index > -1) {
+            newData.splice(index, 1);
+            handleData(newData);
+        }
+    }
+    const handleEdit = (e) => {
+        const index = findIndex(e.currentTarget.parentElement.id)
         if(index > -1) {
             setEditState(true);
             setEditIndex(index)
         }
     }
-
-    const handleDelete = (e) => {
-        const newList = [...list];
-
-        const index = findIndex(e.currentTarget.parentElement.id);
-        if(index > -1) {
-            newList.splice(index, 1);
-            setList(newList);
-        }
-
-    }
-
-    const findIndex = (findId) => {
-        return list.findIndex(item => item.id == parseInt(findId));
-    }
-
-    function handleSave(e) {
+    const handleSave = (e) => {
         e.preventDefault();
 
         let newEntry;
@@ -80,17 +73,17 @@ const ListForm = ({ title, formType, ...props }) => {
                 start: e.target.elements[2].value,
                 end: e.target.elements[3].value,
                 location: e.target.elements[4].value,
+                description: e.target.elements[5].value,
                 placeholder: e.target.elements[0].value,
                 id: nextId,
             } }
 
             nextId++;
 
-        let newList = [...list];
-        newList[editIndex] = newEntry;
-
-        setList(newList);
-        setEditState(false);
+            let newData = [...data];
+            newData[editIndex] = newEntry;
+            handleData(newData);
+            setEditState(false);
     }
 
     return (
@@ -107,8 +100,8 @@ const ListForm = ({ title, formType, ...props }) => {
                 { !editState ?
                     <>
                         <ul style={expandStyle}>
-                        { list ?
-                        list.map((item, index) => (
+                        { data ?
+                        data.map((item, index) => (
                             <li id={item.id} key={(item.id + item.placeholder)} className='list-item'>
                                 <span>{item.placeholder}</span>
                                 <button className='edit-button' onClick={handleEdit}><MdEdit className='edit-icon' /></button>
@@ -122,13 +115,15 @@ const ListForm = ({ title, formType, ...props }) => {
                         { formType === 'education' ?
                             <EducationEditForm
                                 handleSave = {handleSave}
-                                object = {list[editIndex]}
+                                object = {data[editIndex]}
                                 className = 'edit-form'
+                                style={expandStyle}
                             />:
                             <ExperienceEditForm
                                 handleSave = {handleSave}
-                                object = {list[editIndex]}
+                                object = {data[editIndex]}
                                 className = 'edit-form'
+                                style={expandStyle}
                             />
                         }
                     </>

@@ -33,3 +33,14 @@ input {
     margin-right: auto;
     background: transparent;
 }
+
+form :nth-child(5) > .inputContainer {
+    height: 10rem;
+}
+
+textarea {
+    background-color: transparent;
+    border: none;
+    width: 100%;
+    height: 100%;
+}

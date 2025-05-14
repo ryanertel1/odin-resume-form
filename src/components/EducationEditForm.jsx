@@ -25,7 +25,7 @@ const EducationEditForm = ({ handleSave, object, ...props }) => {
     }
 
     return(
-        <form onSubmit={handleSave}>
+        <form onSubmit={handleSave} style={props.style}>
             <TextBox type={'text'} placeholder={'Enter school name'} label={'Institution'} title={'Institution'} value={schoolValue} onChange={handleSchoolChange}/>
             <TextBox type={'text'} placeholder={'Enter degree level and name'} label={'Degree'} title={'Degree'} value={degreeValue} onChange={handleDegreeChange}/>
             <div className='dates-section'

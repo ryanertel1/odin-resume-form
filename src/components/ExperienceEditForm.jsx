@@ -1,4 +1,5 @@
 import TextBox from './TextBox.jsx';
+import TextAreaBox from './TextAreaBox.jsx';
 import React, { useState } from "react";
 
 const ExperienceEditForm = ({ handleSave, object, ...props }) => {
@@ -7,6 +8,7 @@ const ExperienceEditForm = ({ handleSave, object, ...props }) => {
     const [startValue, setStartValue] = useState(object.start);
     const [endValue, setEndValue] = useState(object.end);
     const [addressValue, setAddressValue] = useState(object.location);
+    const [descriptionValue, setDescriptionValue] = useState(object.description);
 
     function handleCompanyChange(event) {
         setCompanyValue(event.target.value);
@@ -23,9 +25,12 @@ const ExperienceEditForm = ({ handleSave, object, ...props }) => {
     function handleAddressChange(event) {
         setAddressValue(event.target.value);
     }
+    function handleDescriptionChange(event) {
+        setDescriptionValue(event.target.value);
+    }
 
     return(
-        <form onSubmit={handleSave}>
+        <form onSubmit={handleSave} style={props.style}>
             <TextBox type={'text'} placeholder={'Enter employer name'} label={'Employer'} title={'Employer'} value={companyValue} onChange={handleCompanyChange}/>
             <TextBox type={'text'} placeholder={'Enter job title'} label={'Title'} title={'Title'} value={titleValue} onChange={handleTitleChange}/>
             <div className='dates-section'
@@ -37,6 +42,7 @@ const ExperienceEditForm = ({ handleSave, object, ...props }) => {
                 <TextBox className='date-end' type={'date'} label={'End date'} title={'End Date'} value={endValue} onChange={handleEndChange}/>
             </div>
             <TextBox type={'text'} placeholder={'Enter employer address'} label={'Address'} title={'Address'} value={addressValue} onChange={handleAddressChange}/>
+            <TextAreaBox placeholder={'Enter Description'} label={'Description'} title={'Description'} value={descriptionValue} onChange={handleDescriptionChange}/>
 
             <button type='submit'>Save</button>
         </form>
